@@ -1,7 +1,7 @@
 # vue-3-demo
-npm install
-npm run serve
-json-server --watch db.json
+#npm install
+#npm run serve
+#json-server --watch db.json
 
 
 
