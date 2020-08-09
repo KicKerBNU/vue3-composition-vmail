@@ -9,7 +9,6 @@
 
 <script>
 import useKeydown from "../composables/use-keydown";
-
 export default {
   setup(props, { emit }) {
     useKeydown([
@@ -18,16 +17,14 @@ export default {
         fn: () => {
           emit("closeModal");
         }
-      },
-      {
-        key: "Enter",
-        fn: () => {
-          console.log("Teste usando enter");
-        }
       }
     ]);
+
+    return {
+      emit
+    };
   }
 };
 </script>
 
-<style></style>
+<style scoped></style>

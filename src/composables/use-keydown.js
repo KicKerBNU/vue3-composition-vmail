@@ -1,17 +1,16 @@
 import { onBeforeUnmount } from "vue";
 
 let useKeydown = keyCombos => {
-  let onkeydown = event => {
-    console.log(event.key);
+  let onKeydown = event => {
     let kc = keyCombos.find(kc => kc.key == event.key);
     if (kc) {
       kc.fn();
     }
   };
-  window.addEventListener("keydown", onkeydown);
 
+  window.addEventListener("keydown", onKeydown);
   onBeforeUnmount(() => {
-    window.removeEventListener("keydown", onkeydown);
+    window.removeEventListener("keydown", onKeydown);
   });
 };
 
