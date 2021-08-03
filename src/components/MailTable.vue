@@ -1,4 +1,5 @@
 <template>
+  <BulkActionBar :emails="unarchivedEmails" />
   <table class="mail-table">
     <tbody>
       <tr
@@ -10,7 +11,7 @@
           <input
             type="checkbox"
             @click="emailSelection.toggle(email)"
-            :selected="emailSelection.emails.has(email)"
+            :checked="emailSelection.emails.has(email)"
           />
         </td>
         <td @click="openEmail(email)">{{ email.from }}</td>
@@ -32,12 +33,14 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { format } from "date-fns";
 import axios from "axios";
 import MailView from "../components/MailView.vue";
 import ModalView from "../components/ModalView.vue";
-import { useEmailSelection } from "../composables/use-email-selection.js";
+import { useEmailSelection } from "../composables/use-email-selection";
+import BulkActionBar from "../components/BulkActionBar.vue";
+
 
 export default {
   async setup() {
@@ -46,13 +49,14 @@ export default {
     return {
       emailSelection: useEmailSelection(),
       format,
-      emails,
-      openedEmail: null
+      emails: ref(emails),
+      openedEmail: ref(null)
     };
   },
   components: {
     MailView,
-    ModalView
+    ModalView,
+    BulkActionBar
   },
   computed: {
     sortedEmails() {
